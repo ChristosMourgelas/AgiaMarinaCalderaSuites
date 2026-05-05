@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="en" class="h-full">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agia Marina Suites — Santorini</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&amp;family=Outfit:wght@300;400;500&amp;display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+            sans: ['Outfit', 'system-ui', 'sans-serif']
+          },
+          colors: {
+            sand: '#f5f0eb',
+            warm: '#e8e0d8',
+            stone: '#8a8178',
+            charcoal: '#2c2825',
+            accent: '#b8a898'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .img-placeholder {
+      background: linear-gradient(135deg, #e8e0d8 0%, #d4ccc4 50%, #c8bfb5 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8a8178;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .img-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255, 255, 255, 0.05) 20px, rgba(255, 255, 255, 0.05) 40px);
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .nav-link {
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: #2c2825;
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active-link::after {
+      width: 100%;
+    }
+  </style>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+  </style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+</head>
+
+<body class="h-full bg-white text-charcoal font-sans">
+  <!-- HEADER -->
+  <header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 bg-transparent">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+      <a href="#" onclick="navigateTo('home');return false;"
+        class="font-serif text-xl md:text-2xl font-medium tracking-wide" id="header-logo">Agia Marina Suites</a>
+      <nav class="hidden md:flex items-center gap-8 text-sm tracking-widest uppercase font-light">
+        <a href="#" onclick="navigateTo('home');return false;" class="nav-link active-link" data-page="home">Home</a> <a
+          href="#" onclick="navigateTo('suites');return false;" class="nav-link" data-page="suites">Suites</a> <a
+          href="#" onclick="navigateTo('gallery');return false;" class="nav-link" data-page="gallery">Gallery</a> <a
+          href="#" onclick="navigateTo('location');return false;" class="nav-link" data-page="location">Location</a> <a
+          href="#" onclick="navigateTo('contact');return false;" class="nav-link" data-page="contact">Contact</a>
+      </nav><button onclick="toggleMobileMenu()" class="md:hidden p-2" aria-label="Open menu"> <i data-lucide="menu"
+          class="w-6 h-6"></i> </button>
+    </div>
+  </header><!-- MOBILE MENU -->
+  <div id="mobile-menu" class="fixed inset-0 z-[60] bg-white flex flex-col items-center justify-center gap-8 hidden">
+    <button onclick="toggleMobileMenu()" class="absolute top-6 right-6 p-2" aria-label="Close menu"> <i data-lucide="x"
+        class="w-6 h-6"></i> </button>
+    <nav class="flex flex-col items-center gap-6 text-lg tracking-widest uppercase font-light">
+      <a href="#" onclick="navigateTo('home');toggleMobileMenu();return false;">Home</a> <a href="#"
+        onclick="navigateTo('suites');toggleMobileMenu();return false;">Suites</a> <a href="#"
+        onclick="navigateTo('gallery');toggleMobileMenu();return false;">Gallery</a> <a href="#"
+        onclick="navigateTo('location');toggleMobileMenu();return false;">Location</a> <a href="#"
+        onclick="navigateTo('contact');toggleMobileMenu();return false;">Contact</a>
+    </nav>
+  </div><!-- ==================== HOME PAGE ==================== -->
+  <main id="page-home" class="page active">
+    <!-- HERO -->
+    <section class="w-full h-screen relative flex items-center justify-center">
+      <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/64.jpg');">
+      </div>
+      <div class="absolute inset-0 bg-black/30"></div>
+      <div class="relative z-10 text-center text-white px-6 max-w-3xl">
+        <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl font-light mb-4">
+          Luxury Suites with Caldera View
+        </h1>
+        <p class="text-base md:text-lg opacity-90 mb-10">
+          Experience Santorini in elegance and privacy
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#" class="border border-white px-8 py-3 text-sm uppercase">
+            View Suites
+          </a>
+          <a href="https://www.booking.com" target="_blank" class="bg-white text-charcoal px-8 py-3 text-sm uppercase">
+            Book Now
+          </a>
+        </div>
+      </div>
+    </section><!-- INTRO -->
+    <section class="py-20 md:py-28 px-6">
+      <div class="max-w-3xl mx-auto text-center fade-in">
+        <div class="w-12 h-px bg-accent mx-auto mb-8"></div>
+        <p id="intro-text" class="font-serif text-xl md:text-2xl lg:text-3xl font-light leading-relaxed text-stone">
+          Nestled on the cliffs of Santorini, our suites offer breathtaking views, privacy, and comfort for an
+          unforgettable stay.</p>
+        <div class="w-12 h-px bg-accent mx-auto mt-8"></div>
+      </div>
+    </section><!-- FEATURED SUITES -->
+    <section class="pb-20 md:pb-28 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="font-serif text-3xl md:text-4xl font-light text-center mb-16 fade-in">Our Suites</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+
+          <!-- Suite 1 -->
+          <div class="group fade-in">
+            <div class="aspect-[4/3] mb-6 rounded-sm group-hover:shadow-lg transition-shadow duration-500"
+              style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/27.jpg'); background-size: cover; background-position: center;">
+            </div>
+            <h3 class="font-serif text-2xl font-light mb-2">Caldera Suite</h3>
+            <p class="text-stone text-sm leading-relaxed mb-4">A spacious suite with panoramic views of the caldera and
+              volcano.</p>
+            <div class="flex flex-wrap gap-3 mb-6">
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Sea View</span>
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Jacuzzi</span>
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Private Terrace</span>
+            </div>
+            <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer"
+              class="text-sm tracking-widest uppercase border-b border-charcoal pb-1 hover:border-accent hover:text-accent transition-colors">Book
+              Now</a>
+          </div>
+
+          <!-- Suite 2 -->
+          <div class="group fade-in">
+            <div class="aspect-[4/3] mb-6 rounded-sm group-hover:shadow-lg transition-shadow duration-500"
+              style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/95.jpg'); background-size: cover; background-position: center;">
+            </div>
+            <h3 class="font-serif text-2xl font-light mb-2">Sunset Suite</h3>
+            <p class="text-stone text-sm leading-relaxed mb-4">Designed for romance with west-facing views of the
+              legendary Santorini sunset.</p>
+            <div class="flex flex-wrap gap-3 mb-6">
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Sea View</span>
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">King Bed</span>
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Private Terrace</span>
+            </div>
+            <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer"
+              class="text-sm tracking-widest uppercase border-b border-charcoal pb-1 hover:border-accent hover:text-accent transition-colors">Book
+              Now</a>
+          </div>
+
+          <!-- Suite 3 -->
+          <div class="group fade-in">
+            <div class="aspect-[4/3] mb-6 rounded-sm group-hover:shadow-lg transition-shadow duration-500"
+              style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/76.jpg'); background-size: cover; background-position: center;">
+            </div>
+            <h3 class="font-serif text-2xl font-light mb-2">Aegean Suite</h3>
+            <p class="text-stone text-sm leading-relaxed mb-4">Minimalist luxury with elegant interiors and a private
+              plunge pool.</p>
+            <div class="flex flex-wrap gap-3 mb-6">
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Plunge Pool</span>
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Sea View</span>
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Balcony</span>
+            </div>
+            <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer"
+              class="text-sm tracking-widest uppercase border-b border-charcoal pb-1 hover:border-accent hover:text-accent transition-colors">Book
+              Now</a>
+          </div>
+
+          <!-- Suite 4 -->
+          <div class="group fade-in">
+            <div class="aspect-[4/3] mb-6 rounded-sm group-hover:shadow-lg transition-shadow duration-500"
+              style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/44.jpg'); background-size: cover; background-position: center;">
+            </div>
+            <h3 class="font-serif text-2xl font-light mb-2">Megalohori Suite</h3>
+            <p class="text-stone text-sm leading-relaxed mb-4">A spacious suite with panoramic views of the caldera and
+              volcano.</p>
+            <div class="flex flex-wrap gap-3 mb-6">
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Sea View</span>
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Jacuzzi</span>
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Private Terrace</span>
+            </div>
+            <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer"
+              class="text-sm tracking-widest uppercase border-b border-charcoal pb-1 hover:border-accent hover:text-accent transition-colors">Book
+              Now</a>
+          </div>
+
+        </div>
+      </div>
+    </section><!-- EXPERIENCE -->
+    <section class="bg-sand py-20 md:py-28 px-6">
+      <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+        <div class="aspect-[4/3] rounded-sm fade-in" style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/18.jpg'); 
+                    background-size: cover; 
+                    background-position: center;">
+          <!-- <span class="z-10 text-xs tracking-widest">[ EXPERIENCE IMAGE ]</span> -->
+        </div>
+        <div class="fade-in">
+          <h2 class="font-serif text-3xl md:text-4xl font-light mb-6 leading-tight">The Santorini Experience</h2>
+          <p class="text-stone leading-relaxed mb-4">Wake up to endless blue and enjoy magical sunsets from your private
+            terrace. Every detail is crafted for serenity.</p>
+          <p class="text-stone leading-relaxed">From curated local experiences to in-suite dining, we ensure your stay
+            is nothing short of extraordinary.</p>
+        </div>
+      </div>
+    </section><!-- GALLERY PREVIEW -->
+    <section class="py-20 md:py-28 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="font-serif text-3xl md:text-4xl font-light text-center mb-16 fade-in">Gallery</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 fade-in">
+
+          <!-- Image 1 -->
+          <div class="aspect-square rounded-sm hover:opacity-90 transition-opacity cursor-pointer"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/13.jpg'); background-size: cover; background-position: center;">
+          </div>
+
+          <!-- Image 2 -->
+          <div class="aspect-square rounded-sm hover:opacity-90 transition-opacity cursor-pointer"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/14.jpg'); background-size: cover; background-position: center;">
+          </div>
+
+          <!-- Image 3 -->
+          <div class="aspect-square rounded-sm hover:opacity-90 transition-opacity cursor-pointer"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/17.jpg'); background-size: cover; background-position: center;">
+          </div>
+
+          <!-- Image 4 -->
+          <div class="aspect-square rounded-sm hover:opacity-90 transition-opacity cursor-pointer"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/79.jpg'); background-size: cover; background-position: center;">
+          </div>
+
+          <!-- Image 5 -->
+          <div class="aspect-square rounded-sm hover:opacity-90 transition-opacity cursor-pointer"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/35.jpg'); background-size: cover; background-position: center;">
+          </div>
+
+          <!-- Image 6 -->
+          <div class="aspect-square rounded-sm hover:opacity-90 transition-opacity cursor-pointer"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/12.jpg'); background-size: cover; background-position: center;">
+          </div>
+
+        </div>
+        <div class="text-center mt-12">
+          <a href="#" onclick="navigateTo('gallery');return false;"
+            class="border border-charcoal px-8 py-3 text-sm tracking-widest uppercase hover:bg-charcoal hover:text-white transition-all duration-300 inline-block">
+            View Full Gallery
+          </a>
+        </div>
+      </div>
+    </section><!-- CTA -->
+    <section class="bg-charcoal text-white py-20 md:py-28 px-6 text-center">
+      <div class="max-w-2xl mx-auto fade-in">
+        <h2 id="cta-text" class="font-serif text-3xl md:text-5xl font-light mb-8">Book your unforgettable stay</h2><a
+          href="https://www.booking.com" target="_blank" rel="noopener noreferrer"
+          class="border border-white px-10 py-4 text-sm tracking-widest uppercase hover:bg-white hover:text-charcoal transition-all duration-300 inline-block">Book
+          Now</a>
+      </div>
+    </section>
+  </main><!-- ==================== SUITES PAGE ==================== -->
+  <main id="page-suites" class="page">
+    <section class="pt-32 pb-20 px-6">
+      <div class="max-w-5xl mx-auto">
+        <h1 class="font-serif text-4xl md:text-5xl font-light text-center mb-4">Our Suites</h1>
+        <p class="text-stone text-center mb-16 max-w-xl mx-auto">Each suite is a sanctuary of calm, designed with
+          refined elegance and unmatched views.</p>
+
+        <!-- Suite 1: Caldera Suite -->
+        <div class="grid md:grid-cols-2 gap-10 mb-20 items-center fade-in">
+          <div class="aspect-[4/3] rounded-sm"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/27.jpg'); background-size: cover; background-position: center;">
+          </div>
+          <div>
+            <h2 class="font-serif text-3xl font-light mb-4">Caldera Suite</h2>
+            <p class="text-stone leading-relaxed mb-6">Our flagship suite featuring panoramic caldera views, a private
+              outdoor jacuzzi, and a spacious living area. The interiors blend Cycladic architecture with contemporary
+              design for an experience of pure luxury.</p>
+            <div class="flex flex-wrap gap-4 mb-6">
+              <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="wifi"
+                  class="w-4 h-4"></i>WiFi</span>
+              <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="wind"
+                  class="w-4 h-4"></i>A/C</span>
+              <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="sun" class="w-4 h-4"></i>Private
+                Terrace</span>
+              <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="waves" class="w-4 h-4"></i>Sea
+                View</span>
+              <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="droplets"
+                  class="w-4 h-4"></i>Jacuzzi</span>
+            </div>
+            <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer"
+              class="bg-charcoal text-white px-8 py-3 text-sm tracking-widest uppercase hover:bg-stone transition-colors inline-block">Book
+              Now</a>
+          </div>
+        </div>
+
+        <!-- Suite 2: Sunset Suite -->
+        <div class="grid md:grid-cols-2 gap-10 mb-20 items-center fade-in">
+          <div class="md:order-2 aspect-[4/3] rounded-sm"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/95.jpg'); background-size: cover; background-position: center;">
+          </div>
+          <div class="md:order-1">
+            <h2 class="font-serif text-3xl font-light mb-4">Sunset Suite</h2>
+            <p class="text-stone leading-relaxed mb-6">Perfectly positioned for Santorini's legendary sunsets. This
+              suite offers a king-size bed, elegant furnishings, and a private terrace where golden light paints the sky
+              each evening.</p>
+            <div class="flex flex-wrap gap-4 mb-6">
+              <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="wifi"
+                  class="w-4 h-4"></i>WiFi</span>
+              <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="wind"
+                  class="w-4 h-4"></i>A/C</span>
+              <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="sun" class="w-4 h-4"></i>Private
+                Terrace</span>
+              <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="waves" class="w-4 h-4"></i>Sea
+                View</span>
+            </div>
+            <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer"
+              class="bg-charcoal text-white px-8 py-3 text-sm tracking-widest uppercase hover:bg-stone transition-colors inline-block">Book
+              Now</a>
+          </div>
+        </div>
+
+        <!-- Suite 3: Aegean Suite -->
+        <div class="grid md:grid-cols-2 gap-10 mb-20 items-center fade-in">
+          <div class="aspect-[4/3] rounded-sm"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/76.jpg'); background-size: cover; background-position: center;">
+          </div>
+          <div>
+            <h2 class="font-serif text-3xl font-light mb-4">Aegean Suite</h2>
+            <p class="text-stone leading-relaxed mb-6">A minimalist retreat with a private plunge pool overlooking the
+              Aegean Sea. Clean lines, natural materials, and soft lighting create an atmosphere of absolute
+              tranquility.</p>
+            <div class="flex flex-wrap gap-4 mb-6">
+              <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="wifi"
+                  class="w-4 h-4"></i>WiFi</span>
+              <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="wind"
+                  class="w-4 h-4"></i>A/C</span>
+              <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="waves" class="w-4 h-4"></i>Sea
+                View</span>
+              <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="droplets"
+                  class="w-4 h-4"></i>Plunge Pool</span>
+              <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="layout"
+                  class="w-4 h-4"></i>Balcony</span>
+            </div>
+            <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer"
+              class="bg-charcoal text-white px-8 py-3 text-sm tracking-widest uppercase hover:bg-stone transition-colors inline-block">Book
+              Now</a>
+          </div>
+        </div>
+
+        <!-- Suite 4: Megalohori Suite -->
+        <div class="grid md:grid-cols-2 gap-10 mb-20 items-center fade-in">
+          <div class="md:order-2 aspect-[4/3] rounded-sm"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/44.jpg'); background-size: cover; background-position: center;">
+          </div>
+          <div class="md:order-1">
+            <h2 class="font-serif text-3xl font-light mb-4">Megalohori Suite</h2>
+            <p class="text-stone leading-relaxed mb-6">A spacious suite with panoramic views of the caldera and volcano.
+            </p>
+            <div class="flex flex-wrap gap-4 mb-6">
+              <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="wifi"
+                  class="w-4 h-4"></i>WiFi</span>
+              <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="wind"
+                  class="w-4 h-4"></i>A/C</span>
+              <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="sun" class="w-4 h-4"></i>Private
+                Terrace</span>
+              <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="waves" class="w-4 h-4"></i>Sea
+                View</span>
+            </div>
+            <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer"
+              class="bg-charcoal text-white px-8 py-3 text-sm tracking-widest uppercase hover:bg-stone transition-colors inline-block">Book
+              Now</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main><!-- ==================== GALLERY PAGE ==================== -->
+  <main id="page-gallery" class="page">
+    <section class="pt-32 pb-20 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h1 class="font-serif text-4xl md:text-5xl font-light text-center mb-16">Gallery</h1>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+          <div class="aspect-square rounded-sm hover:opacity-80 transition-opacity cursor-pointer"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/13.jpg'); background-size: cover; background-position: center;">
+          </div>
+          <div class="aspect-square rounded-sm hover:opacity-80 transition-opacity cursor-pointer"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/14.jpg'); background-size: cover; background-position: center;">
+          </div>
+          <div class="aspect-square rounded-sm hover:opacity-80 transition-opacity cursor-pointer"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/17.jpg'); background-size: cover; background-position: center;">
+          </div>
+          <div class="aspect-square rounded-sm hover:opacity-80 transition-opacity cursor-pointer"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/79.jpg'); background-size: cover; background-position: center;">
+          </div>
+          <div class="aspect-square rounded-sm hover:opacity-80 transition-opacity cursor-pointer"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/35.jpg'); background-size: cover; background-position: center;">
+          </div>
+          <div class="aspect-square rounded-sm hover:opacity-80 transition-opacity cursor-pointer"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/12.jpg'); background-size: cover; background-position: center;">
+          </div>
+          <div class="aspect-square rounded-sm hover:opacity-80 transition-opacity cursor-pointer"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/27.jpg'); background-size: cover; background-position: center;">
+          </div>
+          <div class="aspect-square rounded-sm hover:opacity-80 transition-opacity cursor-pointer"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/95.jpg'); background-size: cover; background-position: center;">
+          </div>
+          <div class="aspect-square rounded-sm hover:opacity-80 transition-opacity cursor-pointer"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/76.jpg'); background-size: cover; background-position: center;">
+          </div>
+          <div class="aspect-square rounded-sm hover:opacity-80 transition-opacity cursor-pointer"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/44.jpg'); background-size: cover; background-position: center;">
+          </div>
+          <div class="aspect-square rounded-sm hover:opacity-80 transition-opacity cursor-pointer"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/13.jpg'); background-size: cover; background-position: center;">
+          </div>
+          <div class="aspect-square rounded-sm hover:opacity-80 transition-opacity cursor-pointer"
+            style="background-image: url('https://www.calderastories.eu/sites/calderastories/files/photos/14.jpg'); background-size: cover; background-position: center;">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main><!-- ==================== LOCATION PAGE ==================== -->
+  <main id="page-location" class="page">
+    <section class="pt-32 pb-20 px-6">
+      <div class="max-w-5xl mx-auto">
+        <h1 class="font-serif text-4xl md:text-5xl font-light text-center mb-4">Location</h1>
+        <p class="text-stone text-center mb-16 max-w-xl mx-auto">Strategically located in the heart of Santorini for
+          easy access to attractions and stunning views.</p>
+
+        <div class="grid md:grid-cols-2 gap-12 items-center mb-16 fade-in">
+          <!-- Map Image -->
+          <div class="aspect-[4/3] rounded-sm"
+            style="background-image: url('http://agia-marina-suites.local/wp-content/uploads/2026/04/Screenshot-2026-04-04-144154.png'); background-size: cover; background-position: center;">
+          </div>
+
+          <!-- Location Details -->
+          <div>
+            <h2 class="font-serif text-3xl font-light mb-6">Santorini's Prime Location</h2>
+            <p class="text-stone leading-relaxed mb-6">Located in the heart of Santorini, our suites offer easy access
+              to key attractions, fine dining, and stunning views of the Aegean Sea.</p>
+
+            <div class="space-y-4">
+              <div class="flex items-start gap-4">
+                <span class="text-accent mt-1"><i data-lucide="map-pin" class="w-5 h-5"></i></span>
+                <div>
+                  <p class="font-serif text-lg">Airport (JTR)</p>
+                  <p class="text-stone text-sm">~15 minutes by car</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <span class="text-accent mt-1"><i data-lucide="map-pin" class="w-5 h-5"></i></span>
+                <div>
+                  <p class="font-serif text-lg">Fira Town Center</p>
+                  <p class="text-stone text-sm">~8 minutes by car</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <span class="text-accent mt-1"><i data-lucide="map-pin" class="w-5 h-5"></i></span>
+                <div>
+                  <p class="font-serif text-lg">Oia Village</p>
+                  <p class="text-stone text-sm">~12 minutes by car</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <span class="text-accent mt-1"><i data-lucide="map-pin" class="w-5 h-5"></i></span>
+                <div>
+                  <p class="font-serif text-lg">Kamari Beach</p>
+                  <p class="text-stone text-sm">~10 minutes by car</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main><!-- ==================== CONTACT PAGE ==================== -->
+  <main id="page-contact" class="page">
+    <section class="pt-32 pb-20 px-6">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="font-serif text-4xl md:text-5xl font-light text-center mb-4">Get in Touch</h1>
+        <p class="text-stone text-center mb-16 max-w-xl mx-auto">Have questions? We'd love to hear from you. Contact us
+          anytime.</p>
+        <div class="grid md:grid-cols-2 gap-12"><!-- FORM -->
+          <div class="fade-in">
+            <form id="contact-form" class="space-y-6">
+              <div><label for="name" class="block text-sm tracking-widest uppercase mb-2 font-light">Name</label> <input
+                  type="text" id="name" name="name" required
+                  class="w-full border border-warm bg-transparent px-4 py-3 text-sm focus:outline-none focus:border-charcoal transition-colors"
+                  placeholder="Your name">
+              </div>
+              <div><label for="email" class="block text-sm tracking-widest uppercase mb-2 font-light">Email</label>
+                <input type="email" id="email" name="email" required
+                  class="w-full border border-warm bg-transparent px-4 py-3 text-sm focus:outline-none focus:border-charcoal transition-colors"
+                  placeholder="Your email">
+              </div>
+              <div><label for="message" class="block text-sm tracking-widest uppercase mb-2 font-light">Message</label>
+                <textarea id="message" name="message" rows="5" required
+                  class="w-full border border-warm bg-transparent px-4 py-3 text-sm focus:outline-none focus:border-charcoal transition-colors resize-none"
+                  placeholder="Your message"></textarea>
+              </div><button type="submit"
+                class="bg-charcoal text-white px-8 py-3 text-sm tracking-widest uppercase hover:bg-stone transition-colors w-full">Send
+                Message</button>
+              <div id="form-status" class="text-center text-sm mt-4"></div>
+            </form>
+          </div><!-- CONTACT INFO -->
+          <div class="fade-in">
+            <h3 class="font-serif text-2xl font-light mb-8">Contact Information</h3>
+            <div class="space-y-8">
+              <div>
+                <p class="text-xs tracking-widest uppercase font-light mb-2 text-stone">Phone</p><a id="phone-display"
+                  href="tel:+30228600000" class="font-serif text-xl hover:text-accent transition-colors">+30 22860
+                  00000</a>
+              </div>
+              <div>
+                <p class="text-xs tracking-widest uppercase font-light mb-2 text-stone">Email</p><a id="email-display"
+                  href="mailto:info@agiamarinavillas.com"
+                  class="font-serif text-xl hover:text-accent transition-colors">info@agiamarinavillas.com</a>
+              </div>
+              <div>
+                <p class="text-xs tracking-widest uppercase font-light mb-2 text-stone">Address</p>
+                <p class="font-serif text-lg">Santorini, Greece</p>
+              </div>
+              <div>
+                <p class="text-xs tracking-widest uppercase font-light mb-4 text-stone">Follow Us</p><a
+                  href="https://instagram.com" target="_blank" rel="noopener noreferrer"
+                  class="inline-flex items-center gap-3 text-charcoal hover:text-accent transition-colors"> <i
+                    data-lucide="instagram" class="w-6 h-6"></i> <span class="text-sm">Instagram</span> </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- FOOTER -->
+  <footer class="bg-charcoal text-white py-12 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-3 gap-8 mb-8">
+        <div>
+          <h3 class="font-serif text-lg font-light mb-2">Agia Marina Suites</h3>
+          <p class="text-sand text-sm">Luxury suites with caldera views in the heart of Santorini.</p>
+        </div>
+        <div>
+          <p class="text-xs tracking-widest uppercase font-light mb-2 text-warm">Quick Links</p>
+          <nav class="flex flex-col gap-2 text-sm"><a href="#" onclick="navigateTo('home');return false;"
+              class="hover:text-accent transition-colors">Home</a> <a href="#"
+              onclick="navigateTo('suites');return false;" class="hover:text-accent transition-colors">Suites</a> <a
+              href="#" onclick="navigateTo('gallery');return false;"
+              class="hover:text-accent transition-colors">Gallery</a>
+          </nav>
+        </div>
+        <div>
+          <p class="text-xs tracking-widest uppercase font-light mb-2 text-warm">Contact</p>
+          <div class="text-sm space-y-1">
+            <p id="footer-phone" class="hover:text-accent cursor-pointer">+30 22860 00000</p>
+            <p id="footer-email" class="hover:text-accent cursor-pointer">info@agiamarinavillas.com</p>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-warm/30 pt-6 text-center text-xs text-sand">
+        <p>© 2024 Agia Marina Suites. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // Initialize Element SDK
+    const defaultConfig = {
+      hero_title: 'Luxury Suites with Caldera View',
+      hero_subtitle: 'Experience Santorini in elegance and privacy',
+      intro_text: 'Nestled on the cliffs of Santorini, our suites offer breathtaking views, privacy, and comfort for an unforgettable stay.',
+      cta_text: 'Book your unforgettable stay',
+      phone_number: '+30 22860 00000',
+      email_address: 'info@agiamarinavillas.com'
+    };
+
+    let config = { ...defaultConfig };
+
+    const elementSDKHandler = {
+      defaultConfig,
+      onConfigChange: async (newConfig) => {
+        config = { ...newConfig };
+        document.getElementById('hero-title').textContent = config.hero_title || defaultConfig.hero_title;
+        document.getElementById('hero-subtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+        document.getElementById('intro-text').textContent = config.intro_text || defaultConfig.intro_text;
+        document.getElementById('cta-text').textContent = config.cta_text || defaultConfig.cta_text;
+        document.getElementById('phone-display').textContent = config.phone_number || defaultConfig.phone_number;
+        document.getElementById('phone-display').href = `tel:${(config.phone_number || defaultConfig.phone_number).replace(/\s/g, '')}`;
+        document.getElementById('footer-phone').textContent = config.phone_number || defaultConfig.phone_number;
+        document.getElementById('email-display').textContent = config.email_address || defaultConfig.email_address;
+        document.getElementById('email-display').href = `mailto:${config.email_address || defaultConfig.email_address}`;
+        document.getElementById('footer-email').textContent = config.email_address || defaultConfig.email_address;
+      },
+      mapToCapabilities: () => ({
+        recolorables: [],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      }),
+      mapToEditPanelValues: () => new Map([
+        ['hero_title', config.hero_title || defaultConfig.hero_title],
+        ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
+        ['intro_text', config.intro_text || defaultConfig.intro_text],
+        ['cta_text', config.cta_text || defaultConfig.cta_text],
+        ['phone_number', config.phone_number || defaultConfig.phone_number],
+        ['email_address', config.email_address || defaultConfig.email_address]
+      ])
+    };
+
+    if (window.elementSdk) {
+      window.elementSdk.init(elementSDKHandler);
+    }
+
+    // Navigation
+    function navigateTo(page) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(`page-${page}`).classList.add('active');
+
+      document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active-link'));
+      document.querySelector(`[data-page="${page}"]`)?.classList.add('active-link');
+
+      document.getElementById('mobile-menu').classList.add('hidden');
+      window.scrollTo(0, 0);
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Sticky header on scroll
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        header.classList.add('bg-white', 'shadow-md');
+        header.classList.remove('bg-transparent');
+      } else {
+        header.classList.remove('bg-white', 'shadow-md');
+        header.classList.add('bg-transparent');
+      }
+    });
+
+    // Contact form
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      if (name && email && message) {
+        const status = document.getElementById('form-status');
+        status.textContent = 'Message sent successfully! We will get back to you soon.';
+        status.classList.add('text-accent');
+        document.getElementById('contact-form').reset();
+        setTimeout(() => { status.textContent = ''; status.classList.remove('text-accent'); }, 5000);
+      }
+    });
+
+    // Lucide icons
+    lucide.createIcons();
+  </script>
+  <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'9e6ebe6be4357170',t:'MTc3NTI4OTI1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+</body>
+
+</html>

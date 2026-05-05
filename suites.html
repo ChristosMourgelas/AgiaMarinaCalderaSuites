@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en" class="h-full">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agia Marina Suites — Suites</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="h-full bg-white text-charcoal font-sans">
+  <div id="header-placeholder"></div>
+
+  <main class="pt-32 pb-20 px-6">
+    <div class="max-w-5xl mx-auto">
+      <h1 class="font-serif text-4xl md:text-5xl font-light text-center mb-4 fade-in">Our Suites</h1>
+      <p class="text-stone text-center mb-16 max-w-xl mx-auto fade-in">Each suite is a sanctuary of calm, designed with
+        refined
+        elegance and unmatched views.</p>
+
+      <div class="grid md:grid-cols-2 gap-10 mb-20 items-center fade-in">
+        <!-- Photo Carousel -->
+        <div class="relative aspect-[4/3] rounded-sm overflow-hidden group carousel" id="kalisti-carousel">
+
+          <!-- Slides -->
+          <div class="absolute inset-0 opacity-100 transition-opacity duration-1000 bg-cover bg-center slide"
+            style="background-image: url('photos/Suites/Kalisti/FOTOKAMARI-3.jpg');"></div>
+          <div class="absolute inset-0 opacity-0 transition-opacity duration-1000 bg-cover bg-center slide"
+            style="background-image: url('photos/Suites/Kalisti/FOTOKAMARI-6.jpg');"></div>
+          <div class="absolute inset-0 opacity-0 transition-opacity duration-1000 bg-cover bg-center slide"
+            style="background-image: url('photos/Suites/Kalisti/FOTOKAMARI-16.jpg');"></div>
+          <div class="absolute inset-0 opacity-0 transition-opacity duration-1000 bg-cover bg-center slide"
+            style="background-image: url('photos/Suites/Kalisti/FOTOKAMARI-21.jpg');"></div>
+          <div class="absolute inset-0 opacity-0 transition-opacity duration-1000 bg-cover bg-center slide"
+            style="background-image: url('photos/Suites/Kalisti/FOTOKAMARI-25.jpg');"></div>
+          <div class="absolute inset-0 opacity-0 transition-opacity duration-1000 bg-cover bg-center slide"
+            style="background-image: url('photos/Suites/Kalisti/FOTOKAMARI-26.jpg');"></div>
+          <div class="absolute inset-0 opacity-0 transition-opacity duration-1000 bg-cover bg-center slide"
+            style="background-image: url('photos/Suites/Kalisti/FOTOKAMARI-31.jpg');"></div>
+
+          <!-- Navigation Arrows -->
+          <button
+            class="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity z-20"
+            onclick="moveSlide('kalisti-carousel', -1)">
+            <i data-lucide="chevron-left" class="w-8 h-8 font-light"></i>
+          </button>
+          <button
+            class="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity z-20"
+            onclick="moveSlide('kalisti-carousel', 1)">
+            <i data-lucide="chevron-right" class="w-8 h-8 font-light"></i>
+          </button>
+        </div>
+
+        <div>
+          <h2 class="font-serif text-3xl font-light mb-4">Kalisti Suite</h2>
+          <p class="text-stone leading-relaxed mb-6">Our flagship suite featuring panoramic caldera views, a private
+            outdoor jacuzzi, and a spacious living area. The interiors blend Cycladic architecture with contemporary
+            design for an experience of pure luxury.</p>
+          <div class="flex flex-wrap gap-4 mb-6">
+            <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="wifi"
+                class="w-4 h-4"></i>WiFi</span>
+            <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="air-vent"
+                class="w-4 h-4"></i>A/C</span>
+            <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="waves" class="w-4 h-4"></i>Sea
+              View</span>
+            <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="layout"
+                class="w-4 h-4"></i>Balcony</span>
+            <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="droplets"
+                class="w-4 h-4"></i>Jacuzzi</span>
+          </div>
+          <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer"
+            class="bg-charcoal text-white px-8 py-3 text-sm tracking-widest uppercase hover:bg-stone transition-colors inline-block">Book
+            Now</a>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-10 mb-20 items-center fade-in">
+        <div class="md:order-2 aspect-[4/3] rounded-sm"
+          style="background-image: url('photos/Suites/Tholos/FOTOKAMARI-57.jpg'); background-size: cover; background-position: center;">
+        </div>
+        <div class="md:order-1">
+          <h2 class="font-serif text-3xl font-light mb-4">Tholos Suite</h2>
+          <p class="text-stone leading-relaxed mb-6">Perfectly positioned for Santorini's legendary sunsets. This suite
+            offers a king-size bed, elegant furnishings, and a private terrace where golden light paints the sky each
+            evening.</p>
+          <div class="flex flex-wrap gap-4 mb-6">
+            <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="wifi"
+                class="w-4 h-4"></i>WiFi</span>
+            <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="air-vent"
+                class="w-4 h-4"></i>A/C</span>
+            <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="waves" class="w-4 h-4"></i>Sea
+              View</span>
+            <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="layout"
+                class="w-4 h-4"></i>Balcony</span>
+            <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="droplets"
+                class="w-4 h-4"></i>Jacuzzi</span>
+          </div>
+          <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer"
+            class="bg-charcoal text-white px-8 py-3 text-sm tracking-widest uppercase hover:bg-stone transition-colors inline-block">Book
+            Now</a>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-10 mb-20 items-center fade-in">
+        <div class="aspect-[4/3] rounded-sm"
+          style="background-image: url('photos/Suites/Thera/FOTOKAMARI-121.jpg'); background-size: cover; background-position: center;">
+        </div>
+        <div>
+          <h2 class="font-serif text-3xl font-light mb-4">Thera Suite</h2>
+          <p class="text-stone leading-relaxed mb-6">A minimalist retreat with a private plunge pool overlooking the
+            Aegean Sea. Clean lines, natural materials, and soft lighting create an atmosphere of absolute tranquility.
+          </p>
+          <div class="flex flex-wrap gap-4 mb-6">
+            <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="wifi"
+                class="w-4 h-4"></i>WiFi</span>
+            <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="air-vent"
+                class="w-4 h-4"></i>A/C</span>
+            <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="waves" class="w-4 h-4"></i>Sea
+              View</span>
+            <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="scan" class="w-4 h-4"></i>Gravel
+              Terrace</span>
+            <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="sun" class="w-4 h-4"></i>Sun
+              Loungers</span>
+          </div>
+          <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer"
+            class="bg-charcoal text-white px-8 py-3 text-sm tracking-widest uppercase hover:bg-stone transition-colors inline-block">Book
+            Now</a>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-10 mb-20 items-center fade-in">
+        <div class="md:order-2 aspect-[4/3] rounded-sm"
+          style="background-image: url('photos/Suites/Strogili/FOTOKAMARI-89.jpg'); background-size: cover; background-position: center;">
+        </div>
+        <div class="md:order-1">
+          <h2 class="font-serif text-3xl font-light mb-4">Strogili Suite</h2>
+          <p class="text-stone leading-relaxed mb-6">A spacious suite with panoramic views of the caldera and volcano.
+          </p>
+          <div class="flex flex-wrap gap-4 mb-6">
+            <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="wifi"
+                class="w-4 h-4"></i>WiFi</span>
+            <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="air-vent"
+                class="w-4 h-4"></i>A/C</span>
+            <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="waves" class="w-4 h-4"></i>Sea
+              View</span>
+            <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="scan" class="w-4 h-4"></i>Gravel
+              Terrace</span>
+            <span class="flex items-center gap-2 text-sm text-stone"><i data-lucide="sun" class="w-4 h-4"></i>Sun
+              Loungers</span>
+          </div>
+          <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer"
+            class="bg-charcoal text-white px-8 py-3 text-sm tracking-widest uppercase hover:bg-stone transition-colors inline-block">Book
+            Now</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="script.js"></script>
+</body>
+
+</html>

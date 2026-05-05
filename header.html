@@ -1,0 +1,27 @@
+<header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 bg-transparent">
+  <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+    <a href="index.html" class="font-serif text-xl md:text-2xl font-medium tracking-wide">Agia Marina Caldera Suites</a>
+    <nav class="hidden md:flex items-center gap-8 text-sm tracking-widest uppercase font-light">
+      <a href="index.html" class="nav-link" data-page="index">Home</a>
+      <a href="suites.html" class="nav-link" data-page="suites">Suites</a>
+      <a href="gallery.html" class="nav-link" data-page="gallery">Gallery</a>
+      <a href="location.html" class="nav-link" data-page="location">Location</a>
+      <a href="contact.html" class="nav-link" data-page="contact">Contact</a>
+      <a href="services.html" class="nav-link" data-page="services">Services</a>
+    </nav>
+    <button onclick="toggleMobileMenu()" class="md:hidden p-2"><i data-lucide="menu" class="w-6 h-6"></i></button>
+  </div>
+</header>
+
+<div id="mobile-menu" class="fixed inset-0 z-[60] bg-white flex flex-col items-center justify-center gap-8 hidden">
+  <button onclick="toggleMobileMenu()" class="absolute top-6 right-6 p-2"><i data-lucide="x"
+      class="w-6 h-6"></i></button>
+  <nav class="flex flex-col items-center gap-6 text-lg tracking-widest uppercase font-light">
+    <a href="index.html">Home</a>
+    <a href="suites.html">Suites</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="location.html">Location</a>
+    <a href="contact.html">Contact</a>
+    <a href="services.html">Services</a>
+  </nav>
+</div>
