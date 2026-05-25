@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en" class="h-full">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agia Marina Suites — Home</title>
+
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="lightbox.css">
+
+  <style>
+    /* ── Lightbox overlay ───────────────────────────────────────────── */
+    #suite-lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.92);
+      align-items: center;
+      justify-content: center;
+    }
+
+    #suite-lightbox.open {
+      display: flex;
+    }
+
+    #suite-lb-backdrop {
+      position: absolute;
+      inset: 0;
+      cursor: zoom-out;
+    }
+
+    #suite-lb-img-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: min(90vw, 1200px);
+      max-height: 88vh;
+      pointer-events: none;
+    }
+
+    #suite-lb-img {
+      display: block;
+      max-width: 100%;
+      max-height: 88vh;
+      object-fit: contain;
+      pointer-events: none;
+      user-select: none;
+      transition: opacity 0.25s ease;
+    }
+
+    #suite-lb-img.fading {
+      opacity: 0;
+    }
+
+    #suite-lb-close {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      z-index: 2;
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.75);
+      cursor: pointer;
+      padding: 4px;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    #suite-lb-close:hover {
+      color: #fff;
+    }
+
+    #suite-lb-prev,
+    #suite-lb-next {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.65);
+      cursor: pointer;
+      padding: 16px 20px;
+      transition: color 0.2s;
+    }
+
+    #suite-lb-prev:hover,
+    #suite-lb-next:hover {
+      color: #fff;
+    }
+
+    #suite-lb-prev {
+      left: 20px;
+    }
+
+    #suite-lb-next {
+      right: 20px;
+    }
+
+    #suite-lb-counter {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      color: rgba(255, 255, 255, 0.5);
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+    }
+
+    /* Carousel cursor & slide transition */
+    .suite-carousel {
+      cursor: zoom-in;
+    }
+
+    .suite-carousel .slide {
+      transition: opacity 1s ease;
+    }
+  </style>
+</head>
+
+<body class="h-full bg-white text-charcoal font-sans">
+
+  <div id="header-placeholder"></div>
+
+  <!-- ===================== SUITE LIGHTBOX ===================== -->
+  <div id="suite-lightbox" role="dialog" aria-modal="true" aria-label="Suite image viewer">
+    <div id="suite-lb-backdrop" onclick="suiteLbClose()"></div>
+
+    <button id="suite-lb-close" onclick="suiteLbClose()" title="Close (Esc)">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+
+    <button id="suite-lb-prev" onclick="suiteLbMove(-1)" title="Previous">
+      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
+    </button>
+
+    <div id="suite-lb-img-wrap">
+      <img id="suite-lb-img" src="" alt="Suite photo">
+    </div>
+
+    <button id="suite-lb-next" onclick="suiteLbMove(1)" title="Next">
+      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6" />
+      </svg>
+    </button>
+
+    <div id="suite-lb-counter"></div>
+  </div>
+  <!-- =================== END SUITE LIGHTBOX =================== -->
+
+  <main>
+    <section class="w-full h-screen relative flex items-center justify-center">
+      <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style="background-image: url('photos/home/FOTOKAMARI-35.jpg');"></div>
+      <div class="absolute inset-0 bg-black/30"></div>
+      <div class="relative z-10 text-center text-white px-6 max-w-3xl">
+        <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl font-light mb-4 fade-in">Luxury Suites with Caldera View
+        </h1>
+        <p class="text-base md:text-lg opacity-90 mb-10 fade-in">Experience Santorini in elegance and privacy</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
+          <a href="suites.html"
+            class="border border-white px-8 py-3 text-sm uppercase hover:bg-white hover:text-charcoal transition">View
+            Suites</a>
+          <a href="https://www.booking.com/hotel/gr/agia-marina-caldera-suites.html" target="_blank"
+            class="bg-white text-charcoal px-8 py-3 text-sm uppercase hover:bg-transparent hover:text-white hover:border-white border border-transparent transition">Book
+            Now</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 md:py-28 px-6">
+      <div class="max-w-3xl mx-auto text-center fade-in">
+        <div class="w-12 h-px bg-accent mx-auto mb-8"></div>
+        <p class="font-serif text-xl md:text-2xl lg:text-3xl font-light leading-relaxed text-stone">Nestled on the
+          cliffs of Santorini, our suites offer breathtaking views, privacy, and comfort for an unforgettable stay.</p>
+        <div class="w-12 h-px bg-accent mx-auto mt-8"></div>
+      </div>
+    </section>
+
+    <section class="pb-20 md:pb-28 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="font-serif text-3xl md:text-4xl font-light text-center mb-16 fade-in">Our Suites</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+
+          <!-- Kalisti Suite -->
+          <div class="group fade-in">
+            <div class="relative aspect-[4/3] mb-6 rounded-sm overflow-hidden suite-carousel" id="home-kalisti-carousel"
+              onclick="suiteLbOpen('home-kalisti-carousel')">
+
+              <div class="absolute inset-0 opacity-100 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Kalisti/FOTOKAMARI-3.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Kalisti/FOTOKAMARI-6.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Kalisti/FOTOKAMARI-16.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Kalisti/FOTOKAMARI-21.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Kalisti/FOTOKAMARI-25.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Kalisti/FOTOKAMARI-26.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Kalisti/FOTOKAMARI-31.jpg');"></div>
+
+              <button
+                class="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity z-20"
+                onclick="event.stopPropagation(); moveSlide('home-kalisti-carousel', -1)">
+                <i data-lucide="chevron-left" class="w-7 h-7"></i>
+              </button>
+              <button
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity z-20"
+                onclick="event.stopPropagation(); moveSlide('home-kalisti-carousel', 1)">
+                <i data-lucide="chevron-right" class="w-7 h-7"></i>
+              </button>
+            </div>
+            <h3 class="font-serif text-2xl font-light mb-2">Kalisti Suite</h3>
+            <p class="text-stone text-sm leading-relaxed mb-4">A spacious suite with panoramic views of the caldera and
+              volcano.</p>
+            <div class="flex flex-wrap gap-3 mb-6">
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Sea View</span>
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Jacuzzi</span>
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Private Balcony</span>
+            </div>
+            <a href="suites.html"
+              class="text-sm tracking-widest uppercase border-b border-charcoal pb-1 hover:border-accent hover:text-accent transition-colors">Discover</a>
+          </div>
+
+          <!-- Tholos Suite -->
+          <div class="group fade-in">
+            <div class="relative aspect-[4/3] mb-6 rounded-sm overflow-hidden suite-carousel" id="home-tholos-carousel"
+              onclick="suiteLbOpen('home-tholos-carousel')">
+
+              <div class="absolute inset-0 opacity-100 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Tholos/FOTOKAMARI-57.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Tholos/FOTOKAMARI-53.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Tholos/FOTOKAMARI-55.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Tholos/FOTOKAMARI-59.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Tholos/FOTOKAMARI-62.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Tholos/FOTOKAMARI-184.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Tholos/FOTOKAMARI-37.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Tholos/FOTOKAMARI-179.jpg');"></div>
+
+              <button
+                class="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity z-20"
+                onclick="event.stopPropagation(); moveSlide('home-tholos-carousel', -1)">
+                <i data-lucide="chevron-left" class="w-7 h-7"></i>
+              </button>
+              <button
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity z-20"
+                onclick="event.stopPropagation(); moveSlide('home-tholos-carousel', 1)">
+                <i data-lucide="chevron-right" class="w-7 h-7"></i>
+              </button>
+            </div>
+            <h3 class="font-serif text-2xl font-light mb-2">Tholos Suite</h3>
+            <p class="text-stone text-sm leading-relaxed mb-4">A spacious suite with panoramic views of the caldera and
+              volcano.</p>
+            <div class="flex flex-wrap gap-3 mb-6">
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Sea View</span>
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Jacuzzi</span>
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Private Balcony</span>
+            </div>
+            <a href="suites.html"
+              class="text-sm tracking-widest uppercase border-b border-charcoal pb-1 hover:border-accent hover:text-accent transition-colors">Discover</a>
+          </div>
+
+          <!-- Thera Suite -->
+          <div class="group fade-in">
+            <div class="relative aspect-[4/3] mb-6 rounded-sm overflow-hidden suite-carousel" id="home-thera-carousel"
+              onclick="suiteLbOpen('home-thera-carousel')">
+
+              <div class="absolute inset-0 opacity-100 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Thera/FOTOKAMARI-121.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Thera/FOTOKAMARI-123.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Thera/FOTOKAMARI-127.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Thera/FOTOKAMARI-128.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Thera/FOTOKAMARI-131.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Thera/FOTOKAMARI-211.jpg');"></div>
+
+              <button
+                class="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity z-20"
+                onclick="event.stopPropagation(); moveSlide('home-thera-carousel', -1)">
+                <i data-lucide="chevron-left" class="w-7 h-7"></i>
+              </button>
+              <button
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity z-20"
+                onclick="event.stopPropagation(); moveSlide('home-thera-carousel', 1)">
+                <i data-lucide="chevron-right" class="w-7 h-7"></i>
+              </button>
+            </div>
+            <h3 class="font-serif text-2xl font-light mb-2">Thera Suite</h3>
+            <p class="text-stone text-sm leading-relaxed mb-4">Minimalist luxury with elegant interiors.</p>
+            <div class="flex flex-wrap gap-3 mb-6">
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Sea View</span>
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Sun Loungers</span>
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Gravel Terrace</span>
+            </div>
+            <a href="suites.html"
+              class="text-sm tracking-widest uppercase border-b border-charcoal pb-1 hover:border-accent hover:text-accent transition-colors">Discover</a>
+          </div>
+
+          <!-- Strogili Suite -->
+          <div class="group fade-in">
+            <div class="relative aspect-[4/3] mb-6 rounded-sm overflow-hidden suite-carousel"
+              id="home-strogili-carousel" onclick="suiteLbOpen('home-strogili-carousel')">
+
+              <div class="absolute inset-0 opacity-100 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Strogili/FOTOKAMARI-89.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Strogili/FOTOKAMARI-85.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Strogili/FOTOKAMARI-92.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Strogili/FOTOKAMARI-94.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Strogili/FOTOKAMARI-98.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Strogili/FOTOKAMARI-99.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Strogili/FOTOKAMARI-101.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Strogili/FOTOKAMARI-105.jpg');"></div>
+              <div class="absolute inset-0 opacity-0 bg-cover bg-center slide"
+                style="background-image: url('photos/Suites/Strogili/FOTOKAMARI-201.jpg');"></div>
+
+              <button
+                class="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity z-20"
+                onclick="event.stopPropagation(); moveSlide('home-strogili-carousel', -1)">
+                <i data-lucide="chevron-left" class="w-7 h-7"></i>
+              </button>
+              <button
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity z-20"
+                onclick="event.stopPropagation(); moveSlide('home-strogili-carousel', 1)">
+                <i data-lucide="chevron-right" class="w-7 h-7"></i>
+              </button>
+            </div>
+            <h3 class="font-serif text-2xl font-light mb-2">Strogili Suite</h3>
+            <p class="text-stone text-sm leading-relaxed mb-4">Designed for romance with west-facing views of the
+              legendary Santorini sunset.</p>
+            <div class="flex flex-wrap gap-3 mb-6">
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Sea View</span>
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Sun Loungers</span>
+              <span class="text-xs tracking-wider uppercase border border-warm px-3 py-1">Gravel Terrace</span>
+            </div>
+            <a href="suites.html"
+              class="text-sm tracking-widest uppercase border-b border-charcoal pb-1 hover:border-accent hover:text-accent transition-colors">Discover</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-sand py-20 md:py-28 px-6">
+      <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+        <div class="aspect-[4/3] rounded-sm fade-in"
+          style="background-image: url('photos/home/18.jpg'); background-size: cover; background-position: center;">
+        </div>
+        <div class="fade-in">
+          <h2 class="font-serif text-3xl md:text-4xl font-light mb-6 leading-tight">The Santorini Experience</h2>
+          <p class="text-stone leading-relaxed mb-4">Wake up to endless blue and enjoy magical sunsets from your private
+            balcony. Every detail is crafted for serenity.</p>
+          <p class="text-stone leading-relaxed">From curated local experiences to the quiet luxury of your private
+            suite, we ensure your stay is nothing short of extraordinary.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 md:py-28 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="font-serif text-3xl md:text-4xl font-light text-center mb-16 fade-in">Gallery</h2>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 fade-in" id="gallery-container">
+          <div
+            class="gallery-item aspect-square cursor-pointer rounded-sm transition-transform duration-300 hover:scale-105 hover:shadow-lg"
+            data-src="photos/Gallery/FOTOKAMARI-168.jpg"
+            style="background-image: url('photos/Gallery/FOTOKAMARI-168.jpg'); background-size: cover; background-position: center;">
+          </div>
+          <div
+            class="gallery-item aspect-square cursor-pointer rounded-sm transition-transform duration-300 hover:scale-105 hover:shadow-lg"
+            data-src="photos/Gallery/FOTOKAMARI-37.jpg"
+            style="background-image: url('photos/Gallery/FOTOKAMARI-37.jpg'); background-size: cover; background-position: center;">
+          </div>
+          <div
+            class="gallery-item aspect-square cursor-pointer rounded-sm transition-transform duration-300 hover:scale-105 hover:shadow-lg"
+            data-src="photos/Gallery/FOTOKAMARI-158.jpg"
+            style="background-image: url('photos/Gallery/FOTOKAMARI-158.jpg'); background-size: cover; background-position: center;">
+          </div>
+          <div
+            class="gallery-item aspect-square cursor-pointer rounded-sm transition-transform duration-300 hover:scale-105 hover:shadow-lg"
+            data-src="photos/Gallery/FOTOKAMARI-178.jpg"
+            style="background-image: url('photos/Gallery/FOTOKAMARI-178.jpg'); background-size: cover; background-position: center;">
+          </div>
+          <div
+            class="gallery-item aspect-square cursor-pointer rounded-sm transition-transform duration-300 hover:scale-105 hover:shadow-lg"
+            data-src="photos/Gallery/FOTOKAMARI-171.jpg"
+            style="background-image: url('photos/Gallery/FOTOKAMARI-171.jpg'); background-size: cover; background-position: center;">
+          </div>
+          <div
+            class="gallery-item aspect-square cursor-pointer rounded-sm transition-transform duration-300 hover:scale-105 hover:shadow-lg"
+            data-src="photos/Gallery/FOTOKAMARI-243.jpg"
+            style="background-image: url('photos/Gallery/FOTOKAMARI-243.jpg'); background-size: cover; background-position: center;">
+          </div>
+        </div>
+
+        <div class="text-center mt-12 fade-in">
+          <a href="gallery.html"
+            class="border border-charcoal px-8 py-3 text-sm tracking-widest uppercase hover:bg-charcoal hover:text-white transition-all duration-300 inline-block">View
+            Full Gallery</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-charcoal text-white py-20 md:py-28 px-6 text-center">
+      <div class="max-w-2xl mx-auto fade-in">
+        <h2 class="font-serif text-3xl md:text-5xl font-light mb-8">Book your unforgettable stay</h2>
+        <a href="https://www.booking.com" target="_blank"
+          class="border border-white px-10 py-4 text-sm tracking-widest uppercase hover:bg-white hover:text-charcoal transition-all duration-300 inline-block">Book
+          Now</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Original gallery lightbox (untouched) -->
+  <div id="lightbox"
+    class="fixed inset-0 bg-black/95 z-[100] transition-opacity duration-300 opacity-0 pointer-events-none touch-none overflow-hidden"
+    onclick="handleBackgroundClick(event)">
+    <button onclick="changeSlide(-1)"
+      class="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 text-white/70 hover:text-white text-6xl font-light transition-colors z-[101] hidden md:block">&lsaquo;</button>
+    <button onclick="closeLightbox(true)"
+      class="absolute top-6 right-6 text-white/70 hover:text-white text-4xl font-light transition-colors z-[101]">&times;</button>
+
+    <div id="slider-container" class="slider-container">
+      <div class="slide"><img id="slide-prev" src="" alt="Previous"></div>
+      <div class="slide"><img id="slide-current" src="" alt="Current"></div>
+      <div class="slide"><img id="slide-next" src="" alt="Next"></div>
+    </div>
+
+    <button onclick="changeSlide(1)"
+      class="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 text-white/70 hover:text-white text-6xl font-light transition-colors z-[101] hidden md:block">&rsaquo;</button>
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="script.js"></script>
+  <script src="lightbox.js"></script>
+
+  <script>
+    /* ─── Suite carousel lightbox ──────────────────────────────────── */
+    let suiteLbImages = [];
+    let suiteLbIndex = 0;
+
+    function suiteLbOpen(carouselId) {
+      const carousel = document.getElementById(carouselId);
+      const slides = carousel.querySelectorAll('.slide');
+
+      suiteLbImages = Array.from(slides).map(s => {
+        const match = s.style.backgroundImage.match(/url\(['"]?(.+?)['"]?\)/);
+        return match ? match[1] : '';
+      }).filter(Boolean);
+
+      // Start on the currently visible slide
+      suiteLbIndex = Array.from(slides).findIndex(
+        s => parseFloat(getComputedStyle(s).opacity) > 0.5
+      );
+      if (suiteLbIndex < 0) suiteLbIndex = 0;
+
+      suiteLbRender();
+      document.getElementById('suite-lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function suiteLbClose() {
+      document.getElementById('suite-lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function suiteLbMove(dir) {
+      suiteLbIndex = (suiteLbIndex + dir + suiteLbImages.length) % suiteLbImages.length;
+      suiteLbRender(true);
+    }
+
+    function suiteLbRender(animate) {
+      const img = document.getElementById('suite-lb-img');
+      const counter = document.getElementById('suite-lb-counter');
+
+      if (animate) {
+        img.classList.add('fading');
+        setTimeout(() => {
+          img.src = suiteLbImages[suiteLbIndex];
+          img.classList.remove('fading');
+        }, 220);
+      } else {
+        img.src = suiteLbImages[suiteLbIndex];
+      }
+
+      counter.textContent = (suiteLbIndex + 1) + ' / ' + suiteLbImages.length;
+
+      const showArrows = suiteLbImages.length > 1;
+      document.getElementById('suite-lb-prev').style.display = showArrows ? '' : 'none';
+      document.getElementById('suite-lb-next').style.display = showArrows ? '' : 'none';
+    }
+
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('suite-lightbox').classList.contains('open')) return;
+      if (e.key === 'Escape') suiteLbClose();
+      if (e.key === 'ArrowRight') suiteLbMove(1);
+      if (e.key === 'ArrowLeft') suiteLbMove(-1);
+    });
+  </script>
+
+</body>
+
+</html>
